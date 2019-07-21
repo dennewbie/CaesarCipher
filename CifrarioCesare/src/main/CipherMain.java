@@ -9,14 +9,16 @@ public class CipherMain {
 	//List that contains for each position a letter of the Alphabet.
 	public static List<Character> abc = new ArrayList<Character>(); 
 
-	public static void main(String[] args) {		
-		System.out.println("Welcome to the Caesar Cipher.\nInsert a message:");
+	public static void main(String[] args) {	
+		int cipherShift = 0;
+		System.out.println("\t\t***Welcome to the Caesar Cipher***");
+		
+		System.out.println("\nInsert a message that you want to enrypt/decrypt:");
 		mess = scanner.nextLine(); //taking the user message.
 		
-		int cipherShift = 0;
-		System.out.println("Insert a number (Integer) of cipher that you want to shift:");
+		System.out.println("\nInsert a number (Integer) that represent the number of letter\nthat you want to shift forward/back (shift back with negative number):");
 		cipherShift = scanner.nextInt(); //taking the preferred shifting value for the Caesar Cipher.
-		
+				
 		convertToList();
 		createABC();
 		cryptoLetter(cipherShift);
@@ -24,8 +26,9 @@ public class CipherMain {
 	}
 	
 	public static void checkResult() {
+		System.out.println();
 		for (int i=0; i<arr.size(); i++) {
-			System.out.println(arr.get(i));
+				System.out.print(arr.get(i));
 		}
 	}
 	
@@ -53,17 +56,19 @@ public class CipherMain {
 	
 	public static void cryptoLetter(int cipherShiftUser) {
 		for (int i=0; i<arr.size(); i++) {
-			if (cipherShiftUser < 0) {
-				if ((abc.indexOf(arr.get(i)) + cipherShiftUser) < 0) {
+			if ((abc.indexOf(arr.get(i)) + cipherShiftUser) < 0) {
 					int newCipher = abc.indexOf(arr.get(i)) + cipherShiftUser;
 					while (newCipher < 0) {
 						if ((newCipher + 26) > 0) {
-							arr.set(i, abc.get(newCipher + 26));
+							if (!Character.isLetter(arr.get(i))) {
+								break;
+							} else {
+								arr.set(i, abc.get(newCipher + 26));
+							}
 							break;
 						} 
 						newCipher += 26;
 					}
-				}
 			} else if (abc.indexOf(arr.get(i)) + cipherShiftUser > 25) {
 				int newCipher = cipherShiftUser + abc.indexOf(arr.get(i));
 				while (newCipher > 25) {
