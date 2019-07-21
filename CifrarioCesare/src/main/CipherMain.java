@@ -1,6 +1,6 @@
 package main;
 import java.util.*;
-//Caesar Cipher
+//Caesar Cipher by @dennewbie
 
 public class CipherMain {
 	public static Scanner scanner = new Scanner(System.in); //get user input
